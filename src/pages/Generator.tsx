@@ -175,8 +175,8 @@ export default function Generator({ onSave, defaultOptions }: GeneratorProps) {
           onClick={() => generate()}
           className="border border-black dark:border-white font-golos font-medium py-3 px-4 flex items-center justify-center gap-2 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all"
         >
-          <Icon name="RefreshCw" size={15} />
-          Обновить
+          <Icon name="Sparkles" size={15} />
+          Сгенерировать
         </button>
         <button
           onClick={handleSave}
