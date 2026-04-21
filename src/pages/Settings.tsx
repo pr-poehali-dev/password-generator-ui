@@ -28,12 +28,12 @@ export default function Settings({ defaults, onSave }: SettingsProps) {
 
       <div className="space-y-8">
         <section>
-          <h3 className="font-golos font-medium text-xs uppercase tracking-widest text-gray-400 mb-4">
+          <h3 className="font-golos font-medium text-xs uppercase tracking-widest text-gray-400 dark:text-zinc-500 mb-4">
             По умолчанию
           </h3>
 
           <div className="space-y-4">
-            <div className="border border-gray-100 p-4">
+            <div className="border border-gray-100 dark:border-zinc-800 p-4">
               <div className="flex justify-between items-center mb-3">
                 <span className="font-golos font-medium text-sm">Длина пароля</span>
                 <span className="font-mono text-sm font-semibold">{opts.length}</span>
@@ -44,11 +44,11 @@ export default function Settings({ defaults, onSave }: SettingsProps) {
                 max={32}
                 value={opts.length}
                 onChange={(e) => update('length', Number(e.target.value))}
-                className="w-full h-px bg-gray-200 appearance-none cursor-pointer accent-black"
+                className="w-full h-px bg-gray-200 dark:bg-zinc-700 appearance-none cursor-pointer accent-black dark:accent-white"
               />
               <div className="flex justify-between mt-1">
-                <span className="font-golos text-xs text-gray-300">6</span>
-                <span className="font-golos text-xs text-gray-300">32</span>
+                <span className="font-golos text-xs text-gray-300 dark:text-zinc-600">6</span>
+                <span className="font-golos text-xs text-gray-300 dark:text-zinc-600">32</span>
               </div>
             </div>
 
@@ -59,15 +59,15 @@ export default function Settings({ defaults, onSave }: SettingsProps) {
             ].map(({ key, label, desc }) => (
               <div
                 key={key}
-                className="border border-gray-100 p-4 flex items-center justify-between cursor-pointer hover:border-gray-300 transition-colors"
+                className="border border-gray-100 dark:border-zinc-800 p-4 flex items-center justify-between cursor-pointer hover:border-gray-300 dark:hover:border-zinc-600 transition-colors"
                 onClick={() => update(key, !opts[key])}
               >
                 <div>
                   <div className="font-golos font-medium text-sm">{label}</div>
-                  <div className="font-golos text-xs text-gray-400 mt-0.5">{desc}</div>
+                  <div className="font-golos text-xs text-gray-400 dark:text-zinc-500 mt-0.5">{desc}</div>
                 </div>
-                <div className={`w-9 h-5 rounded-full transition-colors relative ${opts[key] ? 'bg-black' : 'bg-gray-200'}`}>
-                  <div className={`absolute top-0.5 w-4 h-4 bg-white rounded-full transition-all shadow-sm ${opts[key] ? 'left-4' : 'left-0.5'}`} />
+                <div className={`w-9 h-5 rounded-full transition-colors relative ${opts[key] ? 'bg-black dark:bg-white' : 'bg-gray-200 dark:bg-zinc-700'}`}>
+                  <div className={`absolute top-0.5 w-4 h-4 rounded-full transition-all shadow-sm ${opts[key] ? 'left-4 bg-white dark:bg-black' : 'left-0.5 bg-white dark:bg-zinc-400'}`} />
                 </div>
               </div>
             ))}
@@ -75,11 +75,11 @@ export default function Settings({ defaults, onSave }: SettingsProps) {
         </section>
 
         <section>
-          <h3 className="font-golos font-medium text-xs uppercase tracking-widest text-gray-400 mb-4">
+          <h3 className="font-golos font-medium text-xs uppercase tracking-widest text-gray-400 dark:text-zinc-500 mb-4">
             Предпросмотр
           </h3>
-          <div className="border border-dashed border-gray-200 p-4 text-center">
-            <span className="font-golos text-xs text-gray-400">
+          <div className="border border-dashed border-gray-200 dark:border-zinc-700 p-4 text-center">
+            <span className="font-golos text-xs text-gray-400 dark:text-zinc-500">
               Длина: {opts.length} ·{' '}
               {[opts.letters && 'буквы', opts.numbers && 'цифры', opts.symbols && 'символы']
                 .filter(Boolean)
@@ -91,7 +91,7 @@ export default function Settings({ defaults, onSave }: SettingsProps) {
         <button
           onClick={handleSave}
           className={`w-full font-golos font-medium py-3.5 flex items-center justify-center gap-2 transition-all ${
-            saved ? 'bg-green-500 text-white' : 'bg-black text-white hover:bg-gray-900'
+            saved ? 'bg-green-500 text-white' : 'bg-black dark:bg-white text-white dark:text-black hover:bg-gray-900 dark:hover:bg-zinc-200'
           }`}
         >
           <Icon name={saved ? 'Check' : 'Save'} size={15} />

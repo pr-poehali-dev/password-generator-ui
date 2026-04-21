@@ -51,7 +51,7 @@ export default function History({ entries, onDelete, onClear }: HistoryProps) {
         {entries.length > 0 && (
           <button
             onClick={onClear}
-            className="font-golos text-sm text-gray-400 hover:text-black transition-colors flex items-center gap-1.5"
+            className="font-golos text-sm text-gray-400 hover:text-black dark:hover:text-white transition-colors flex items-center gap-1.5"
           >
             <Icon name="Trash2" size={14} />
             Очистить
@@ -61,18 +61,18 @@ export default function History({ entries, onDelete, onClear }: HistoryProps) {
 
       {entries.length === 0 ? (
         <div className="text-center py-20">
-          <div className="inline-flex items-center justify-center w-12 h-12 border border-gray-200 mb-4">
-            <Icon name="Clock" size={20} className="text-gray-300" />
+          <div className="inline-flex items-center justify-center w-12 h-12 border border-gray-200 dark:border-zinc-700 mb-4">
+            <Icon name="Clock" size={20} className="text-gray-300 dark:text-zinc-600" />
           </div>
-          <p className="font-golos text-gray-400 text-sm">История пуста</p>
-          <p className="font-golos text-gray-300 text-xs mt-1">Сохранённые пароли появятся здесь</p>
+          <p className="font-golos text-gray-400 dark:text-zinc-500 text-sm">История пуста</p>
+          <p className="font-golos text-gray-300 dark:text-zinc-600 text-xs mt-1">Сохранённые пароли появятся здесь</p>
         </div>
       ) : (
         <div className="space-y-2">
           {entries.map((entry) => (
             <div
               key={entry.id}
-              className="border border-gray-100 p-4 hover:border-gray-300 transition-colors group"
+              className="border border-gray-100 dark:border-zinc-800 p-4 hover:border-gray-300 dark:hover:border-zinc-600 transition-colors group"
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
@@ -80,17 +80,17 @@ export default function History({ entries, onDelete, onClear }: HistoryProps) {
                     {entry.password}
                   </div>
                   <div className="flex items-center gap-3 flex-wrap">
-                    <span className="font-golos text-xs text-gray-400">
+                    <span className="font-golos text-xs text-gray-400 dark:text-zinc-500">
                       {formatDate(entry.createdAt)}
                     </span>
-                    <span className="font-golos text-xs text-gray-300">·</span>
-                    <span className="font-golos text-xs text-gray-400">
+                    <span className="font-golos text-xs text-gray-300 dark:text-zinc-700">·</span>
+                    <span className="font-golos text-xs text-gray-400 dark:text-zinc-500">
                       {entry.options.length} симв.
                     </span>
                     {optionsTags(entry.options).map((tag) => (
                       <span
                         key={tag}
-                        className="font-golos text-xs bg-gray-50 text-gray-500 px-1.5 py-0.5"
+                        className="font-golos text-xs bg-gray-50 dark:bg-zinc-800 text-gray-500 dark:text-zinc-400 px-1.5 py-0.5"
                       >
                         {tag}
                       </span>
@@ -100,17 +100,17 @@ export default function History({ entries, onDelete, onClear }: HistoryProps) {
                 <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                   <button
                     onClick={() => handleCopy(entry.id, entry.password)}
-                    className="p-1.5 hover:bg-gray-100 transition-colors"
+                    className="p-1.5 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
                     title="Копировать"
                   >
-                    <Icon name={copied === entry.id ? 'Check' : 'Copy'} size={14} className={copied === entry.id ? 'text-green-500' : 'text-gray-400'} />
+                    <Icon name={copied === entry.id ? 'Check' : 'Copy'} size={14} className={copied === entry.id ? 'text-green-500' : 'text-gray-400 dark:text-zinc-500'} />
                   </button>
                   <button
                     onClick={() => onDelete(entry.id)}
-                    className="p-1.5 hover:bg-gray-100 transition-colors"
+                    className="p-1.5 hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
                     title="Удалить"
                   >
-                    <Icon name="X" size={14} className="text-gray-400 hover:text-red-400" />
+                    <Icon name="X" size={14} className="text-gray-400 dark:text-zinc-500 hover:text-red-400" />
                   </button>
                 </div>
               </div>
