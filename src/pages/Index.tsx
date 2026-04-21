@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Icon from '@/components/ui/icon';
 import { useTheme } from '@/hooks/use-theme';
 import Home from './Home';
@@ -24,11 +24,40 @@ const DEFAULT_OPTIONS: PasswordOptions = {
   symbols: true,
 };
 
+function loadHistory(): HistoryEntry[] {
+  try {
+    const raw = localStorage.getItem('passgen_history');
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return parsed.map((e: HistoryEntry) => ({ ...e, createdAt: new Date(e.createdAt) }));
+  } catch {
+    return [];
+  }
+}
+
+function loadOptions(): PasswordOptions {
+  try {
+    const raw = localStorage.getItem('passgen_options');
+    if (!raw) return DEFAULT_OPTIONS;
+    return { ...DEFAULT_OPTIONS, ...JSON.parse(raw) };
+  } catch {
+    return DEFAULT_OPTIONS;
+  }
+}
+
 export default function Index() {
   const [page, setPage] = useState<Page>('home');
-  const [history, setHistory] = useState<HistoryEntry[]>([]);
-  const [defaultOptions, setDefaultOptions] = useState<PasswordOptions>(DEFAULT_OPTIONS);
+  const [history, setHistory] = useState<HistoryEntry[]>(loadHistory);
+  const [defaultOptions, setDefaultOptions] = useState<PasswordOptions>(loadOptions);
   const { theme, toggle } = useTheme();
+
+  useEffect(() => {
+    localStorage.setItem('passgen_history', JSON.stringify(history));
+  }, [history]);
+
+  useEffect(() => {
+    localStorage.setItem('passgen_options', JSON.stringify(defaultOptions));
+  }, [defaultOptions]);
 
   const navigate = (p: string) => setPage(p as Page);
 
