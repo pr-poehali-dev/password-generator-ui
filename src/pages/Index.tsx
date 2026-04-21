@@ -5,12 +5,14 @@ import Home from './Home';
 import Generator, { PasswordOptions } from './Generator';
 import History, { HistoryEntry } from './History';
 import Settings from './Settings';
+import OtherGenerators from './OtherGenerators';
 
-type Page = 'home' | 'generator' | 'history' | 'settings';
+type Page = 'home' | 'generator' | 'history' | 'other' | 'settings';
 
 const NAV = [
   { id: 'home', label: 'Главная', icon: 'Home' },
-  { id: 'generator', label: 'Генератор', icon: 'KeyRound' },
+  { id: 'generator', label: 'Пароль', icon: 'KeyRound' },
+  { id: 'other', label: 'Другие', icon: 'Layers' },
   { id: 'history', label: 'История', icon: 'Clock' },
   { id: 'settings', label: 'Настройки', icon: 'Settings' },
 ] as const;
@@ -93,6 +95,7 @@ export default function Index() {
         {page === 'generator' && (
           <Generator onSave={handleSavePassword} defaultOptions={defaultOptions} />
         )}
+        {page === 'other' && <OtherGenerators />}
         {page === 'history' && (
           <History
             entries={history}
@@ -106,7 +109,7 @@ export default function Index() {
       </main>
 
       <nav className="fixed bottom-0 left-0 right-0 border-t border-gray-100 dark:border-zinc-800 bg-white dark:bg-zinc-950 z-10 transition-colors duration-200">
-        <div className="max-w-md mx-auto grid grid-cols-4">
+        <div className="max-w-md mx-auto grid grid-cols-5">
           {NAV.map(({ id, label, icon }) => {
             const isActive = page === id;
             return (
